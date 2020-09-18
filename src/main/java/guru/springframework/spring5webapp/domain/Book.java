@@ -1,13 +1,25 @@
-package guru.springframework.webapp.domain;
+package guru.springframework.spring5webapp.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Set;
 
+/**
+ * Created by jt on 12/22/19.
+ */
 @Entity
 public class Book {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    private String title;
+    private String isbn;
+
+    @ManyToMany
+    @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "author_id"))
+    private Set<Author> authors;
 
     public Book() {
     }
@@ -18,10 +30,6 @@ public class Book {
         this.authors = authors;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
     public Long getId() {
         return id;
     }
@@ -29,14 +37,6 @@ public class Book {
     public void setId(Long id) {
         this.id = id;
     }
-
-    private String title;
-    private String isbn;
-    private Set<Author> authors;
-
-
-
-
 
     public String getTitle() {
         return title;
@@ -61,6 +61,4 @@ public class Book {
     public void setAuthors(Set<Author> authors) {
         this.authors = authors;
     }
-
-
 }

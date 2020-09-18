@@ -1,17 +1,29 @@
-package guru.springframework.webapp.domain;
+package guru.springframework.spring5webapp.domain;
 
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 public class Author {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    private String firstName;
+    private String lastName;
+
+    @ManyToMany(mappedBy = "authors")
+    private Set<Book> books;
+
+    public Author() {
+    }
+
+    public Author(String firstName, String lastName, Set<Book> books) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.books = books;
+    }
 
     public Long getId() {
         return id;
@@ -19,19 +31,6 @@ public class Author {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    private String firstName;
-    private String lastName;
-    private Set<guru.springframework.webapp.domain.Book> books;
-
-    public Author() {
-    }
-
-    public Author(String firstName, String lastName, Set<guru.springframework.webapp.domain.Book> books) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.books = books;
     }
 
     public String getFirstName() {
@@ -50,13 +49,11 @@ public class Author {
         this.lastName = lastName;
     }
 
-    public Set<guru.springframework.webapp.domain.Book> getBooks() {
+    public Set<Book> getBooks() {
         return books;
     }
 
-    public void setBooks(Set<guru.springframework.webapp.domain.Book> books) {
+    public void setBooks(Set<Book> books) {
         this.books = books;
     }
-
-
 }
