@@ -4,14 +4,14 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-public class Author {
+public class Author{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private  Long id;
 
-    private String firstName;
-    private String lastName;
+    private String firstNmae;
+    private String lastNmae;
 
     @ManyToMany(mappedBy = "authors")
     private Set<Book> books;
@@ -19,9 +19,9 @@ public class Author {
     public Author() {
     }
 
-    public Author(String firstName, String lastName, Set<Book> books) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Author(String firstNmae, String lastNmae, Set<Book> books) {
+        this.firstNmae = firstNmae;
+        this.lastNmae = lastNmae;
         this.books = books;
     }
 
@@ -33,20 +33,20 @@ public class Author {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirstNmae() {
+        return firstNmae;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstNmae(String firstNmae) {
+        this.firstNmae = firstNmae;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLastNmae() {
+        return lastNmae;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastNmae(String lastNmae) {
+        this.lastNmae = lastNmae;
     }
 
     public Set<Book> getBooks() {
@@ -57,3 +57,4 @@ public class Author {
         this.books = books;
     }
 }
+
